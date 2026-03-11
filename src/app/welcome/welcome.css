@@ -1,0 +1,30 @@
+.welcome-container {
+    height: 100vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    gap: 30px;
+    font-family: Arial, Helvetica, sans-serif;
+}
+
+h1 {
+    font-size: 40px;
+    font-weight: 600;
+}
+
+.google-btn {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    padding: 12px 22px;
+    font-size: 16px;
+    border: 1px solid #dadce0;
+    border-radius: 6px;
+    background: white;
+    cursor: pointer;
+}
+
+.google-btn img {
+    width: 20px;
+}
