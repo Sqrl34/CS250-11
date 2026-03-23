@@ -29,7 +29,7 @@ export class RoleSelectionComponent {
                 this.supabaseService.setUserRole(role);
                 try{
                     console.log('Saving user role to db...');
-                    await this.supabaseService.saveUserRole(user.id, role);
+                    await this.supabaseService.saveUserProfile(user, role);
                     console.log("Saved user role to db successfully");
                 }catch(dbError){
                     console.warn('Failed to save user role to db, going to use local state now', dbError);
