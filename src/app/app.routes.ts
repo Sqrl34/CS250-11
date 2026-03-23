@@ -1,4 +1,5 @@
 
+
 import { Routes } from '@angular/router';
 import { WelcomeComponent } from './welcome/welcome';
 import { DashBoardComponent } from './dashboard/dashboard';
@@ -16,3 +17,4 @@ export const routes: Routes = [
 ];
 
  
+

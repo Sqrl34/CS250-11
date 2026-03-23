@@ -1,6 +1,6 @@
 import { Injectable, inject, PLATFORM_ID } from '@angular/core';
 import { createClient, SupabaseClient, type User } from '@supabase/supabase-js';
-import { isPlatformBrowser } from '@angular/common';
+import { isPlatformBrowser, NumberSymbol } from '@angular/common';
 import { timeout } from 'rxjs';
 
 const SUPABASE_URL = 'https://hzxlambzoajpoccwcacm.supabase.co';
@@ -83,6 +83,18 @@ export class SupabaseService {
     }
   }
 
+  async saveProduceListing(row: {
+    user_id: string;
+    title: string;
+    quantity: string;
+    description: string;
+    location: string;
+    available_until: string | null;
+  }): Promise<{error: unknown | null}> {
+    const { error } = await this.supabase.from('produce_listings').insert(row);
+    return {error };
+  }
+
   async getUserRole(userId: string): Promise<'giver' | 'receiver' | null> {
     // Frontend-first behavior: read role from localStorage first.
     const cached = localStorage.getItem('userRole');
@@ -140,6 +152,12 @@ export class SupabaseService {
   markRoleConfirmedThisSession(): void {
     if (isPlatformBrowser(this.platformId)) {
       sessionStorage.setItem(SESSION_ROLE_CONFIRMED_KEY, '1');
+    }
+  }
+
+  resetRoleConfirmedForNextSession(): void {
+    if (isPlatformBrowser(this.platformId)) {
+      sessionStorage.removeItem(SESSION_ROLE_CONFIRMED_KEY)
     }
   }
 
