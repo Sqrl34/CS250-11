@@ -1,8 +1,8 @@
 <div class = "listing-page">
-    <div class = "lising-card">
+    <div class = "listing-card">
         <h1>Create a produce listing for veggies or fruits</h1>
         <p class = "subtitle">Share extra produce with people in your community that could be in more need than you.</p>
-        <form (ngSubmit)="subListing()">
+        <form (ngSubmit)="submitListing()">
             <label for = "title">Produce Name</label>
             <input id = "title" name = "title" type = "text" [(ngModel)] = "listingOfProduceOrFruit.producename" placeHolder = "tomatoes, oranges" required/>
             <label for = "quantity">Quantity</label>
@@ -14,8 +14,8 @@
             <label for="availableUntil">Available Until</label>
             <input id="availableUntil" name="availableUntil" type="date" [(ngModel)]="listingOfProduceOrFruit.availUntil"/>
             <!-- the button is a little messed up and needs fixing -->
-            <button type="submit" [disabled]="submit">{{ submit ? 'Posting...' : Post listing' }}</button>
-
+            <button type="submit" [disabled]="submit">{{ submit ? 'Posting...' : 'Post listing' }}</button>
+            </form>
         <p class="message" *ngIf="message">{{ message }}</p>
     </div>
 </div>

@@ -83,17 +83,7 @@ export class SupabaseService {
     }
   }
 
-  async saveProduceListing(row: {
-    user_id: string;
-    title: string;
-    quantity: string;
-    description: string;
-    location: string;
-    available_until: string | null;
-  }): Promise<{error: unknown | null}> {
-    const { error } = await this.supabase.from('produce_listings').insert(row);
-    return {error };
-  }
+
 
   async getUserRole(userId: string): Promise<'giver' | 'receiver' | null> {
     // Frontend-first behavior: read role from localStorage first.
@@ -126,13 +116,13 @@ export class SupabaseService {
     user_id: string;
     title: string;
     quantity: string;
-    Description: string;
+    description: string;
     location: string;
     available_until: string | null;
   }) {
     const { data, error } = await this.supabase
       .from('listings')
-      .insert({user_id: listing.user_id, title: listing.title, quantity: listing.quantity, description: listing.Description, location: listing.location, available_until: listing.available_until});
+      .insert({user_id: listing.user_id, title: listing.title, quantity: listing.quantity, description: listing.description, location: listing.location, available_until: listing.available_until});
 
     if (error) {
       console.error('Error saving produce listing:', error);
