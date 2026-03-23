@@ -1,4 +1,4 @@
-import { Component, signal } from '@angular/core';
+import { Component, OnInit, signal } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { Router } from '@angular/router';
 import { SupabaseService } from '../services/supabase';
@@ -10,14 +10,25 @@ import { SupabaseService } from '../services/supabase';
   templateUrl: './role-selection.html',
   styleUrl: './role-selection.css',
 })
-export class RoleSelectionComponent {
+export class RoleSelectionComponent implements OnInit{
   selectedRole = signal<'giver' | 'receiver' | null>(null);
   isLoading = signal(false);
 
   constructor(
     private supabaseService: SupabaseService,
     private router: Router
-  ) {}
+  ) { }
+
+  async ngOnInit() {
+    const user = await this.supabaseService.waitForAuthUser();
+    if (user) {
+      try {
+        await this.supabaseService.saveUserProfile(user);
+      } catch {
+
+      }
+    }
+  }
 
   selectRole(role: 'giver' | 'receiver') {
     this.selectedRole.set(role);
@@ -31,18 +42,18 @@ export class RoleSelectionComponent {
     this.isLoading.set(true);
     console.log('Starting role save process...');
     try {
-      const { data } = await this.supabaseService.getSession();
-      const user = data.session?.user;
+      const user = await this.supabaseService.waitForAuthUser();
       console.log('User session:', user);
 
       if (user) {
         // Set role in localStorage so UI can continue without strict DB dependencies.
         this.supabaseService.setUserRole(role);
-        
+        this.supabaseService.markRoleConfirmedThisSession();
+
         try {
           // Also attempt DB save, but don't block user flow on backend issues.
           console.log('Saving role to database...');
-          await this.supabaseService.saveUserRole(user.id, role);
+          await this.supabaseService.saveUserProfile(user, role);
           console.log('Role saved successfully');
         } catch (dbError) {
           console.warn('Could not save role to DB, continuing with local state.', dbError);
