@@ -2,7 +2,7 @@
     <div class = "lising-card">
         <h1>Create a produce listing for veggies or fruits</h1>
         <p class = "subtitle">Share extra produce with people in your community that could be in more need than you.</p>
-        <form (ngSubmit)="submitListing()">
+        <form (ngSubmit)="subListing()">
             <label for = "title">Produce Name</label>
             <input id = "title" name = "title" type = "text" [(ngModel)] = "listingOfProduceOrFruit.producename" placeHolder = "tomatoes, oranges" required/>
             <label for = "quantity">Quantity</label>
@@ -12,7 +12,7 @@
             <label for="location">Pickup Location</label>
             <input id="location" name="location" type="text" [(ngModel)]="listingOfProduceOrFruit.house" placeholder=" my home is somewhere in this region or something similar" required/>
             <label for="availableUntil">Available Until</label>
-            <input id="availableUntil" name="availableUntil" type="date" [(ngModel)]="lising.availUntil"/>
+            <input id="availableUntil" name="availableUntil" type="date" [(ngModel)]="listingOfProduceOrFruit.availUntil"/>
             <button type="submit" [disabled]="submit">{{ submit ? 'Posting...' : Post listing' }}</button>
 
         </form>   
