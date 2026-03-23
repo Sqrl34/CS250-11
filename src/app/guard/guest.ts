@@ -9,8 +9,11 @@ export const guestGuard: CanActivateFn = async () => {
     const { data } = await supabase.getSession();
 
     if (data.session) {
-        router.navigate(['/dashboard']);
-        return false;
+        if (supabase.hasRoleConfirmedThisSession()) {
+            router.navigate(['/dashboard']);
+        } else {
+            router.navigate(['/role-selection']);
+        }
     }
 
     return true;

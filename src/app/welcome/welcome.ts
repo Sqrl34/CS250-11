@@ -12,20 +12,19 @@ export class WelcomeComponent implements OnInit {
   constructor(private supabaseService: SupabaseService, private router: Router) { }
 
   async ngOnInit() {
-    const { data } = await this.supabaseService.getSession();
-    const user = data.session?.user;
+    const user = await this.supabaseService.waitForAuthUser(3000);
 
     if (user) {
-      await this.supabaseService.saveUserToDatabase({
-        id: user.id,
-        email: user.email ?? '',
-        name: user.user_metadata?.['full_name'] ?? '',
-      });
+      try {
+        await this.supabaseService.saveUserProfile(user);
+      } catch {
+
+      }
 
       // If role already exists in localStorage or DB, go to dashboard.
       const role = await this.supabaseService.getUserRole(user.id);
       if (role === 'giver' || role === 'receiver') {
-        this.router.navigate(['/dashboard']);
+        this.router.navigate([this.supabaseService.hasRoleConfirmedThisSession() ? '/dashboard' : '/role-selection']);
       }
     }
   }
