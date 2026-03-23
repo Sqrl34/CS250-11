@@ -53,8 +53,14 @@ export class RoleSelectionComponent {
       }
 
       // Navigate to dashboard after role selection
+
       console.log('Navigating to listing creation page...');
-      this.router.navigate(['/create-listing']);
+      console.log('Current role is ', this.selectedRole());
+      if (this.selectedRole() === 'giver') {
+        this.router.navigate(['/create-listing']);
+      } else {
+        this.router.navigate(['/dashboard']);
+      }
       console.log('Navigation completed');
       this.isLoading.set(false);
     } catch (error) {
