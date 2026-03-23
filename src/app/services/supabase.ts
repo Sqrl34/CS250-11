@@ -121,7 +121,7 @@ export class SupabaseService {
     available_until: string | null;
   }) {
     const { data, error } = await this.supabase
-      .from('listings')
+      .from('produce_listings')
       .insert({user_id: listing.user_id, title: listing.title, quantity: listing.quantity, description: listing.description, location: listing.location, available_until: listing.available_until});
 
     if (error) {
