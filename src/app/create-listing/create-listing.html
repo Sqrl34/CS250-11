@@ -1,0 +1,22 @@
+<div class = "listing-page">
+    <div class = "lising-card">
+        <h1>Create a produce listing for veggies or fruits</h1>
+        <p class = "subtitle">Share extra produce with people in your community that could be in more need than you.</p>
+        <form (ngSubmit)="submitListing()">
+            <label for = "title">Produce Name</label>
+            <input id = "title" name = "title" type = "text" [(ngModel)] = "listing.title" placeHolder = "tomatoes, oranges" required/>
+            <label for = "quantity">Quantity</label>
+            <input id = "quantity" name = "quantity" [(ngModel)] = "listing.quantity" placeholder="2 oranges" required/>
+            <label for = "description">Description</label>
+            <textarea id="description" name="description" [(ngModel)]="listing.description" rows="4" placeholder="how fresh etc"></textarea>
+            <label for="location">Pickup Location</label>
+            <input id="location" name="location" type="text" [(ngModel)]="listing.location" placeholder=" my home is somewhere in this region or something similar" required/>
+            <label for="availableUntil">Available Until</label>
+            <input id="availableUntil" name="availableUntil" type="date" [(ngModel)]="lising.availableUntil"/>
+            <button type="submit" [disabled]="isSubmitting">{{ isSubmitting ? 'Posting...' : Post listing' }}</button>
+
+        </form>   
+        
+        <p class="message" *ngIf="message">{{ message }}</p>
+    </div>
+</div>
