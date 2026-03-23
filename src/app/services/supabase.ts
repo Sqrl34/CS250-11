@@ -1,13 +1,19 @@
-import { Injectable } from '@angular/core';
-import { createClient, SupabaseClient } from '@supabase/supabase-js';
+import { Injectable, inject, PLATFORM_ID } from '@angular/core';
+import { createClient, SupabaseClient, type User } from '@supabase/supabase-js';
+import { isPlatformBrowser } from '@angular/common';
+import { timeout } from 'rxjs';
 
 const SUPABASE_URL = 'https://hzxlambzoajpoccwcacm.supabase.co';
 const SUPABASE_ANON_KEY = 'sb_publishable_nah4tTxAS6AlMp0jCQD4-Q_QiWo7HPx';
+
+/** Sets when the user confirms a role this tab session */
+const SESSION_ROLE_CONFIRMED_KEY = 'urbanYield_roleConfirmed';
 
 @Injectable({
   providedIn: 'root',
 })
 export class SupabaseService {
+  private readonly platformId = inject(PLATFORM_ID)
   private supabase: SupabaseClient;
 
   constructor() {
@@ -21,7 +27,7 @@ export class SupabaseService {
   signInWithGoogle() {
     return this.supabase.auth.signInWithOAuth({
       provider: 'google',
-      options: { redirectTo: 'http://localhost:4200/role-selection'}
+      options: { redirectTo: 'http://localhost:4200/role-selection' }
     });
   }
 
@@ -29,30 +35,54 @@ export class SupabaseService {
     return this.supabase.auth.getSession();
   }
 
-  async saveUserToDatabase(user: {id: string; email: string; name: string}) {
-    const { error } = await this.supabase
-    .from('users')
-    .upsert({
-      uuid: user.id,
-      email: user.email,
-      name: user.name,
-    }, { onConflict: 'uuid'});
+  async waitForAuthUser(timeoutMs = 15000): Promise<User | null> {
+    if (!isPlatformBrowser(this.platformId)) {
+      const {
+        data: { session },
+      } = await this.supabase.auth.getSession();
+      return session?.user ?? null;
+    }
 
-    if (error) {console.error('Error saving user:', error)}
+    const deadline = Date.now() + timeoutMs;
+    while (Date.now() < deadline) {
+      const {
+        data: { session },
+      } = await this.supabase.auth.getSession();
+      if (session?.user) {
+        return session.user;
+      }
+      await new Promise((r) => setTimeout(r, 50));
+    }
+    return null;
   }
 
-  async saveUserRole(userId: string, role: 'giver' | 'receiver') {
-    const { error } = await this.supabase
-      .from('users')
-      .update({ role })
-      .eq('uuid', userId);
+  private displayName(user: User): string {
+    const meta = user.user_metadata;
+    const full = meta?.['full_name'];
+    const name = meta?.['name'];
+    if (typeof full === 'string' && full) return full;
+    if (typeof name === 'string' && name) return name;
+    return '';
+  }
+
+  async saveUserProfile(user: User, role?: 'giver' | 'receiver'): Promise<void> {
+    const row: Record<string, string> = {
+      uuid: user.id,
+      email: user.email ?? '',
+      name: this.displayName(user),
+    };
+    if (role) {
+      row['role'] = role;
+    }
+
+    const { error } = await this.supabase.from('users').upsert(row, { onConflict: 'uuid' });
 
     if (error) {
-      console.error('Error saving user role:', error);
+      console.error('Error saving user profile:', error)
       throw error;
     }
   }
-  
+
   async getUserRole(userId: string): Promise<'giver' | 'receiver' | null> {
     // Frontend-first behavior: read role from localStorage first.
     const cached = localStorage.getItem('userRole');
@@ -105,5 +135,19 @@ export class SupabaseService {
 
   clearUserRole(): void {
     localStorage.removeItem('userRole');
+  }
+
+  markRoleConfirmedThisSession(): void {
+    if (isPlatformBrowser(this.platformId)) {
+      sessionStorage.setItem(SESSION_ROLE_CONFIRMED_KEY, '1');
+    }
+  }
+
+  hasRoleConfirmedThisSession(): boolean {
+    if (!isPlatformBrowser(this.platformId)) {
+      return false;
+    }
+
+    return sessionStorage.getItem(SESSION_ROLE_CONFIRMED_KEY) === '1';
   }
 }

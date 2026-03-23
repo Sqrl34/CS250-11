@@ -1,36 +1,25 @@
 <div class="role-selection-container">
-  <div class="role-selection-card">
-    <h2>Choose Your Role</h2>
-    <p class="role-description">Select whether you want to give or receive resources</p>
+    <div class="role-selection-card">
+        <h2>Choose Your Role</h2>
+        <p class="role-description">Select whether you want to be a giver or receiver</p>
 
-    <div class="role-buttons">
-      <button
-        class="role-btn giver-btn"
-        [class.selected]="selectedRole() === 'giver'"
-        (click)="selectRole('giver')"
-      >
-        <div class="role-icon">🤝</div>
-        <div class="role-title">Giver</div>
-        <div class="role-subtitle">Share your resources</div>
-      </button>
+        <div class="role-buttons">
 
-      <button
-        class="role-btn receiver-btn"
-        [class.selected]="selectedRole() === 'receiver'"
-        (click)="selectRole('receiver')"
-      >
-        <div class="role-icon">🌱</div>
-        <div class="role-title">Receiver</div>
-        <div class="role-subtitle">Get resources you need</div>
-      </button>
+            <button class="role-btn giver-btn" [class.selected]="selectedRole() === 'giver'" (click)="selectRole('giver')">
+                <div class="role-icon">🤝</div>
+                <div class="role-title">Giver</div>
+                <div class="role-subtitle">Share you extra produce</div>
+            </button>
+
+            <button class="role-btn receiver-btn" [class.selected]="selectedRole() === 'receiver'" (click)="selectRole('receiver')">
+                <div class="role-icon">🌱</div>
+                <div class="role-title">Receiver</div>
+                <div class="role-subtitle">Receive produce from givers</div>
+            </button>
+        </div>
+
+        <button class="confirm-btn" [disabled]="!selectedRole() || isLoading()" (click)="confirmRole()">
+            {{isLoading() ? 'Saving...': 'Continue' }}
+        </button>
     </div>
-
-    <button
-      class="confirm-btn"
-      [disabled]="!selectedRole() || isLoading()"
-      (click)="confirmRole()"
-    >
-      {{ isLoading() ? 'Saving...' : 'Continue' }}
-    </button>
-  </div>
 </div>

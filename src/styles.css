@@ -1,3 +1,9 @@
 /* You can add global styles to this file, and also import other style files */
 
+@import url('https://fonts.googleapis.com/css2?family=Bakbak+One&display=swap');
 @import "tailwindcss";
+
+body {
+    margin: 0;
+    background: linear-gradient(135deg, #66bb6a, #43a047);
+}

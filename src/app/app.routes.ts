@@ -1,3 +1,4 @@
+
 import { Routes } from '@angular/router';
 import { WelcomeComponent } from './welcome/welcome';
 import { DashBoardComponent } from './dashboard/dashboard';
@@ -13,3 +14,5 @@ export const routes: Routes = [
     {path: 'dashboard', component: DashBoardComponent, canActivate: [authGuard]},
     {path: 'create-listing', component: CreateListing, canActivate: [authGuard]}
 ];
+
+ 

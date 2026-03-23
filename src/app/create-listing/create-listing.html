@@ -13,6 +13,7 @@
             <input id="location" name="location" type="text" [(ngModel)]="listingOfProduceOrFruit.house" placeholder=" my home is somewhere in this region or something similar" required/>
             <label for="availableUntil">Available Until</label>
             <input id="availableUntil" name="availableUntil" type="date" [(ngModel)]="listingOfProduceOrFruit.availUntil"/>
+            <!-- the button is a little messed up and needs fixing -->
             <button type="submit" [disabled]="submit">{{ submit ? 'Posting...' : Post listing' }}</button>
 
         </form>   
