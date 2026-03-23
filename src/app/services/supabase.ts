@@ -80,6 +80,25 @@ export class SupabaseService {
     return null;
   }
 
+  async saveProduceListing(listing: {
+    user_id: string;
+    title: string;
+    quantity: string;
+    Description: string;
+    location: string;
+    available_until: string | null;
+  }) {
+    const { data, error } = await this.supabase
+      .from('listings')
+      .insert({user_id: listing.user_id, title: listing.title, quantity: listing.quantity, description: listing.Description, location: listing.location, available_until: listing.available_until});
+
+    if (error) {
+      console.error('Error saving produce listing:', error);
+      throw error;
+    }
+    return {data, error};
+  }
+
   setUserRole(role: 'giver' | 'receiver'): void {
     localStorage.setItem('userRole', role);
   }

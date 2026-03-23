@@ -53,8 +53,14 @@ export class RoleSelectionComponent {
       }
 
       // Navigate to dashboard after role selection
-      console.log('Navigating to dashboard...');
-      this.router.navigate(['/dashboard']);
+      //navigate to create-listing if giver, dashboard else.
+      console.log('Navigating based on role...');
+      if (role== 'giver'){
+        this.router.navigate(['create-listing']);
+      }else{
+        this.router.navigate(['/dashboard']);
+      }
+
       console.log('Navigation completed');
       this.isLoading.set(false);
     } catch (error) {
