@@ -7,18 +7,25 @@ export const authGuard: CanActivateFn = async (route: ActivatedRouteSnapshot) =>
     const router = inject(Router);
 
     const { data } = await supabase.getSession();
-    if (data.session) {
-        // If accessing dashboard, check if user has selected a role (front-end first).
-        if (route.routeConfig?.path === 'dashboard') {
-            const userRole = await supabase.getUserRole(data.session.user.id);
-            if (!userRole) {
-                router.navigate(['/role-selection']);
-                return false;
-            }
-        }
-        return true;
+    if (!data.session) { // if not signed in direct to welcome
+      router.navigate(['/welcome']);
+      return false;
     }
 
-    router.navigate(['/welcome'])
-    return false;
-}
+    const requestedPath = route.routeConfig?.path;
+    const userID = data.session.user.id;
+    const userRole = await supabase.getUserRole(userID);
+
+    //pages that require a role for access
+    const rolePickedRequired = ['dashboard', 'create-listing'];
+    if (requestedPath && rolePickedRequired.includes(requestedPath) && !userRole) {
+      router.navigate(['/role-selection']);
+      return false;
+    }
+
+    if (requestedPath === 'create-listing' && userRole !== 'giver') {
+      router.navigate(['/dashboard']);
+      return false;
+    }
+    return true;
+};
