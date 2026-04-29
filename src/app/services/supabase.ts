@@ -119,10 +119,11 @@ export class SupabaseService {
     description: string;
     location: string;
     available_until: string | null;
+    contact_info: string | null;
   }) {
     const { data, error } = await this.supabase
       .from('produce_listings')
-      .insert({user_id: listing.user_id, title: listing.title, quantity: listing.quantity, description: listing.description, location: listing.location, available_until: listing.available_until});
+      .insert({user_id: listing.user_id, title: listing.title, quantity: listing.quantity, description: listing.description, location: listing.location, available_until: listing.available_until, contact_info: listing.contact_info});
 
     if (error) {
       console.error('Error saving produce listing:', error);

@@ -4,15 +4,17 @@
         <p class = "subtitle">Share extra produce with people in your community that could be in more need than you.</p>
         <form (ngSubmit)="submitListing()">
             <label for = "title">Produce Name</label>
-            <input id = "title" name = "title" type = "text" [(ngModel)] = "listingOfProduceOrFruit.producename" placeHolder = "tomatoes, oranges" required/>
+            <input id = "title" name = "title" type = "text" [(ngModel)] = "listingOfProduceOrFruit.producename" placeHolder = "Tomatoes, Oranges,..." required/>
             <label for = "quantity">Quantity</label>
-            <input id = "quantity" name = "quantity" [(ngModel)] = "listingOfProduceOrFruit.quantOfProduce" placeholder="2 oranges" required/>
+            <input id = "quantity" name = "quantity" [(ngModel)] = "listingOfProduceOrFruit.quantOfProduce" placeholder="Three Nectars" required/>
             <label for = "description">Description</label>
-            <textarea id="description" name="description" [(ngModel)]="listingOfProduceOrFruit.descrpt" rows="4" placeholder="how fresh etc"></textarea>
+            <textarea id="description" name="description" [(ngModel)]="listingOfProduceOrFruit.descrpt" rows="4" placeholder="Freshly Ripened or in season etc."></textarea>
             <label for="location">Pickup Location</label>
-            <input id="location" name="location" type="text" [(ngModel)]="listingOfProduceOrFruit.house" placeholder=" my home is somewhere in this region or something similar" required/>
+            <input id="location" name="location" type="text" [(ngModel)]="listingOfProduceOrFruit.house" placeholder="123 Main Street, Anytown, ST 12345, USA" required/>
             <label for="availableUntil">Available Until</label>
             <input id="availableUntil" name="availableUntil" type="date" [(ngModel)]="listingOfProduceOrFruit.availUntil"/>
+            <label for="contact_info">Contact Info</label>
+            <input id="contact_info" name="contact_info" type = "text" [(ngModel)] = "listingOfProduceOrFruit.producename" placeHolder = "Phone or Email" required/>
             <!-- the button is a little messed up and needs fixing -->
             <button type="submit" [disabled]="submit">{{ submit ? 'Posting...' : 'Post listing' }}</button>
             </form>

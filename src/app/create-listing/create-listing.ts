@@ -18,6 +18,7 @@ export class CreateListing {
     descrpt: '',
     house: '',
     availUntil: '',
+    contactInfo: '',
   };
   submit = false;
   message = '';
@@ -48,7 +49,8 @@ export class CreateListing {
         quantity: this.listingOfProduceOrFruit.quantOfProduce,
         description: this.listingOfProduceOrFruit.descrpt,
         location: this.listingOfProduceOrFruit.house,
-        available_until: this.listingOfProduceOrFruit.availUntil || null
+        available_until: this.listingOfProduceOrFruit.availUntil,
+        contact_info: this.listingOfProduceOrFruit.contactInfo || null
       });
       if (error){ //had to put this in to avoid posting on the front end while error on the back end
         console.error('there was an error saving listing please try again:', error);
@@ -61,6 +63,7 @@ export class CreateListing {
           descrpt: '',
           house: '',
           availUntil: '',
+          contactInfo: '',
         };
       }
     } catch(err){
