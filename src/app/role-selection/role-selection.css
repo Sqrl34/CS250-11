@@ -4,7 +4,9 @@
     align-items: center;
     min-height: 100vh;
     padding: 20px;
-    background: linear-gradient(135deg, #4ade80 0%, #22c553 0%, #16a34a 100%);
+    background:
+        linear-gradient(rgba(255, 255, 255, 0.15), rgba(255, 255, 255, 0.15)),
+        url('/cluttercoreBG.png') center/cover fixed no-repeat;
 }
 .role-selection-card {
     background: white;
