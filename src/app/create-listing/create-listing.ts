@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, ChangeDetectorRef } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { SupabaseService } from '../services/supabase';
@@ -22,7 +22,7 @@ export class CreateListing {
   };
   submit = false;
   message = '';
-  constructor(private supabaseService: SupabaseService){}
+  constructor(private supabaseService: SupabaseService, private cdr: ChangeDetectorRef){}
   async submitListing(){
     this.message = '';
     // some people are idiots and wont fill it out.
@@ -49,7 +49,7 @@ export class CreateListing {
         quantity: this.listingOfProduceOrFruit.quantOfProduce,
         description: this.listingOfProduceOrFruit.descrpt,
         location: this.listingOfProduceOrFruit.house,
-        available_until: this.listingOfProduceOrFruit.availUntil,
+        available_until: this.listingOfProduceOrFruit.availUntil || null,
         contact_info: this.listingOfProduceOrFruit.contactInfo || null
       });
       if (error){ //had to put this in to avoid posting on the front end while error on the back end
@@ -71,5 +71,6 @@ export class CreateListing {
       this.message = 'there was an unexpected error, probably our fault, please try again.';
     }
     this.submit = false;
+    this.cdr.detectChanges();
   }
 }
