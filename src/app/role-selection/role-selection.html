@@ -1,20 +1,37 @@
 <div class="role-selection-container">
     <div class="role-selection-card">
-        <h2>Choose Your Role</h2>
-        <p class="role-description">Select whether you want to be a giver or receiver</p>
+        <h2>Welcome!</h2>
+        <p class="role-description">How are we contributing today?</p>
 
         <div class="role-buttons">
 
             <button class="role-btn giver-btn" [class.selected]="selectedRole() === 'giver'" (click)="selectRole('giver')">
-                <div class="role-icon">🤝</div>
-                <div class="role-title">Giver</div>
-                <div class="role-subtitle">Share you extra produce</div>
+                <div class="role-icon">
+                  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64" fill="black" width="64" height="64">
+                    <rect x="12" y="8" width="36" height="48" rx="2" fill="none" stroke="black" stroke-width="3"/>
+                        <line x1="20" y1="20" x2="40" y2="20" stroke="black" stroke-width="2.5"/>
+                        <line x1="20" y1="28" x2="40" y2="28" stroke="black" stroke-width="2.5"/>
+                        <line x1="20" y1="36" x2="34" y2="36" stroke="black" stroke-width="2.5"/>
+                        <path d="M34 44 L44 34 L48 38 L38 48 L34 48 Z" fill="black"/>
+                    </svg>
+                </div>
+<!--                <div class="role-title">Giver</div>-->
+                <div class="role-subtitle">Share Produce</div>
             </button>
 
             <button class="role-btn receiver-btn" [class.selected]="selectedRole() === 'receiver'" (click)="selectRole('receiver')">
-                <div class="role-icon">🌱</div>
-                <div class="role-title">Receiver</div>
-                <div class="role-subtitle">Receive produce from givers</div>
+                <div class="role-icon">
+                  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64" fill="none" width="64" height="64">
+                    <path d="M4 8 L12 8 L20 44 L52 44" stroke="black" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/>
+                    <path d="M16 16 L56 16 L50 36 L22 36 Z" stroke="black" stroke-width="3" stroke-linejoin="round"/>
+                    <line x1="36" y1="16" x2="36" y2="36" stroke="black" stroke-width="2.5"/>
+                    <line x1="16" y1="26" x2="53" y2="26" stroke="black" stroke-width="2.5"/>
+                    <circle cx="24" cy="52" r="4" fill="black"/>
+                    <circle cx="48" cy="52" r="4" fill="black"/>
+                  </svg>
+                </div>
+<!--                <div class="role-title">Receiver</div>-->
+                <div class="role-subtitle">Find Produce</div>
             </button>
         </div>
 

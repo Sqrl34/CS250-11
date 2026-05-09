@@ -14,6 +14,7 @@ export const guestGuard: CanActivateFn = async () => {
         } else {
             router.navigate(['/role-selection']);
         }
+        return false; // Does not allow the welcome page to load
     }
 
     return true;

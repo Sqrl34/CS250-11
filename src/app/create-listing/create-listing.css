@@ -4,7 +4,9 @@
     justify-content: center;
     align-items:center;
     padding: 24px;
-    background: green;
+    background:
+        linear-gradient(rgba(255, 255, 255, 0.15), rgba(255, 255, 255, 0.15)),
+        url('/cluttercoreBG.png') center/cover fixed no-repeat;
 }
 
 .listing-card{
@@ -71,4 +73,33 @@ button:disabled {
     margin-top:16px;
     text-align:center;
     font-weight:600;
+}
+.dropdown-wrapper {
+    position: relative;
+    width: 33%;
+}
+
+.dropdown-list {
+    position: absolute;
+    top: 100%;
+    left: 0;
+    right: 0;
+    max-height: 200px;
+    overflow-y: auto;
+    background: white;
+    border: 1px solid gray;
+    border-top: none;
+    border-radius: 0 0 8px 8px;
+    z-index: 10;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+}
+
+.dropdown-item {
+    padding: 10px 12px;
+    cursor: pointer;
+    font-size: 15px;
+}
+
+.dropdown-item:hover {
+    background: #e8f5e9;
 }
