@@ -10,12 +10,10 @@
 
 // }
 
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { ListingService } from '../services/listing.service';
 import { Listing } from '../model/listing';
-import { Component, OnInit } from "@angular/core";
-import { CommonModule } from "@angular/common";
 import { SupabaseService } from '../services/supabase';
 
 @Component({
