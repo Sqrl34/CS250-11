@@ -1,19 +1,6 @@
-// import { Component, OnInit } from '@angular/core';
-
-// @Component({
-//   selector: 'app-dashboard',
-//   imports: [],
-//   templateUrl: './dashboard.html',
-//   styleUrl: './dashboard.css',
-// })
-// export class DashBoardComponent {
-
-// }
-
-import { Component, OnInit } from '@angular/core';
+import { ChangeDetectorRef, Component, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { ListingService } from '../services/listing.service';
-import { Listing } from '../model/listing';
+import { produce_listings } from '../model/listing.model';
 import { SupabaseService } from '../services/supabase';
 
 @Component({
@@ -23,13 +10,37 @@ import { SupabaseService } from '../services/supabase';
   templateUrl: './dashboard.html',
   styleUrls: ['./dashboard.css']
 })
-export class Dashboard {
-  listings: Listing[] = [];
+export class Dashboard implements OnInit {
+  listings: produce_listings[] = [];
+  isLoading = true;
+  message = '';
 
-  constructor(private listingService: ListingService) {}
+  constructor(private supabaseService: SupabaseService, private cdr: ChangeDetectorRef) {}
 
-  ngOnInit() {
-    this.listings = this.listingService.getListings();
+  async ngOnInit() {
+    await this.loadListings();
+  }
+
+  async loadListings() {
+    this.isLoading = true;
+    this.message = '';
+
+    try {
+      const { data: listings, error } = await this.supabaseService.getProduceListings();
+
+      if(error) {
+        console.error('Error occurred while fetching list:', error);
+        this.message = 'Can\'t load listings. Please retry.';
+      } else {
+        this.listings = listings ?? []
+      }
+    } catch (err) {
+      console.error(err);
+      this.message = 'unexpected error occurred.'
+    }
+
+    this.isLoading = false;
+    this.cdr.detectChanges();
   }
 
 scrollToTop() {

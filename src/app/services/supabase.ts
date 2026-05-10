@@ -144,4 +144,8 @@ export class SupabaseService {
 
     return sessionStorage.getItem(SESSION_ROLE_CONFIRMED_KEY) === '1';
   }
+
+  async getProduceListings() {
+    return this.supabase.from('produce_listings').select('*').order('created_at', { ascending: false })
+  }
 }
