@@ -1,1 +1,55 @@
-<p>dashboard works!</p>
+<!-- TITLE + DIVIDER -->
+<div class="dashboard-header">
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600&display=swap" rel="stylesheet">
+  <h1>Dashboard</h1>
+  <div class="divider"></div>
+</div>
+
+<!-- CENTERED SEARCH + FILTER -->
+<div class="search-filter-bar">
+  <input type="text" class="search-input" placeholder="Search...">
+  <select class="filter-select">
+    <option value="">Filter</option>
+    <option value="location">Location</option>
+    <option value="availability">Availability</option>
+    <option value="date">Available Until</option>
+  </select>
+</div>
+
+<!-- POSTS -->
+<div class="dashboard-container">
+  <div class="listing-card" *ngFor="let item of listings">
+
+    <div class="listing-image">
+      <div class="image-placeholder"></div>
+    </div>
+
+    <!-- LEFT SIDE INFO -->
+    <div class="listing-left">
+      <h2 class="title">{{ item.title }}</h2>
+
+      <div class="details">
+        <span>{{ item.description }}</span>
+        <span>Available until: {{ item.available_until }}</span>
+        <span>Quantity: {{ item.quantity }}</span>
+      </div>
+    </div>
+
+    <!-- CENTER DIVIDER -->
+    <div class="vertical-divider"></div>
+
+    <!-- RIGHT SIDE INFO -->
+    <div class="listing-right">
+      <div class="details">
+        <span>Contact: {{ item.contact_info }}</span>
+        <span>Location: {{ item.location }}</span>
+      </div>
+    </div>
+
+    <button class="claim-button">→</button>
+
+  </div>
+</div>
+
+<!-- BACK TO TOP BUTTON -->
+<button class="back-to-top" (click)="scrollToTop()">↑</button>
