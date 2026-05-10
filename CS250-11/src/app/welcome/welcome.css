@@ -1,0 +1,67 @@
+.welcome-container {
+    height: 100vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    gap: 30px;
+    font-family: Arial, Helvetica, sans-serif;
+}
+
+h1 {
+    font-size: 40px;
+    font-weight: 600;
+}
+
+.google-btn {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    padding: 12px 22px;
+    font-size: 16px;
+    border: 1px solid #dadce0;
+    border-radius: 6px;
+    background: white;
+    cursor: pointer;
+}
+
+.google-btn img {
+    width: 20px;
+}
+
+.title {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    line-height: 1.1;
+    font-family: 'Bakbak One', sans-serif;
+}
+
+.welcome-text {
+    font-size: 30px;
+    color: #166534;
+    letter-spacing: 1px;
+    font-family: 'Bakbak One', sans-serif;
+}
+
+.brand-text {
+    font-size: 64px;
+    font-weight: 700;
+    color: #14532d;
+    letter-spacing: 1px;
+}
+
+.description {
+    max-width: 650px;
+    text-align: center;
+    color: rgba(255, 255, 255, 0.9);
+    font-size: 20px;
+    line-height: 1.6;
+
+    background: rgba(27, 94, 32, 0.85);
+    padding: 20px 25px;
+    border-radius: 8px;
+    box-shadow: 0 6px 20px rgba(0,0,0,0.2);
+    font-family: 'Bakbak One', sans-serif;
+}
+

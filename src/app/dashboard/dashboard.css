@@ -1,0 +1,174 @@
+/* ----------------------------- */
+/* Dashboard Title + Divider     */
+/* ----------------------------- */
+
+.dashboard-header {
+  text-align: center;
+  margin-top: 20px;
+  margin-bottom: 15px;
+}
+
+body {
+  font-family: "Poppins", "Segoe UI", sans-serif;
+}
+
+.dashboard-header h1 {
+  font-family: "Poppins", "Segoe UI", sans-serif;
+  font-size: 32px;
+  font-weight: bold;
+  color: black;
+  margin-bottom: 10px;
+}
+
+.divider {
+  width: 80%;
+  height: 2px;
+  background-color: black;
+  margin: 0 auto;
+}
+
+
+/* ----------------------------- */
+/* Centered Search + Filter Bar  */
+/* ----------------------------- */
+
+.search-filter-bar {
+  width: 85%;
+  max-width: 1200px;
+  margin: 20px auto 30px auto;
+  display: flex;
+  justify-content: center;
+  gap: 15px;
+}
+
+.search-input {
+  flex: 1;
+  width: 60%;
+  padding: 10px 14px;
+  font-size: 16px;
+  border: 1px solid #aaa;
+  border-radius: 6px;
+  background: white; /* WHITE BACKGROUND */
+}
+
+.filter-select {
+  width: 200px;
+  padding: 10px 14px;
+  font-size: 16px;
+  border: 1px solid #aaa;
+  border-radius: 6px;
+  background: white; /* WHITE BACKGROUND */
+}
+
+
+/* ----------------------------- */
+/* Dashboard Container           */
+/* ----------------------------- */
+
+.dashboard-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding-bottom: 60px;
+  gap: 25px;
+}
+
+
+/* ----------------------------- */
+/* Listing Card (extended)       */
+/* ----------------------------- */
+
+.listing-card {
+  display: flex;
+  align-items: center;
+  background: white;
+  border: 1px solid #ccc;
+  border-radius: 10px;
+  padding: 32px;              /* bigger card */
+  width: 85%;                 /* extended */
+  max-width: 1200px;          /* prevents over-expansion */
+  box-shadow: 0 2px 6px rgba(0,0,0,0.1);
+  gap: 30px;
+}
+
+/* IMAGE */
+.listing-image {
+  width: 170px;
+  height: 170px;
+  background: #e8e8e8;
+  border-radius: 6px;
+  border: 2px solid black;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-right: 20px;
+}
+
+/* LEFT + RIGHT SECTIONS */
+.listing-left,
+.listing-right {
+  flex: 1;
+  padding: 0 10px;
+}
+
+.title {
+  font-size: 26px;
+  font-weight: bold;
+  margin-bottom: 10px;
+}
+
+.details span {
+  display: block;
+  margin-bottom: 6px;
+  color: #555;
+  font-size: 17px;
+}
+
+/* CENTER DIVIDER */
+.vertical-divider {
+  width: 2px;
+  background: black;
+  height: 90%; /* taller for bigger card */
+  margin: 0 10px;
+}
+
+/* CLAIM BUTTON */
+.claim-button {
+  background: green;
+  color: white;
+  border: none;
+  border-radius: 6px;
+  font-size: 24px;
+  font-weight: bold;
+  width: 50px;
+  height: 50px;
+  cursor: pointer;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  transition: 0.2s ease;
+}
+
+.claim-button:hover {
+  background: #333;
+  transform: scale(1.05);
+}
+
+
+/* ----------------------------- */
+/* Back to Top Button            */
+/* ----------------------------- */
+
+.back-to-top {
+  position: fixed;
+  bottom: 20px;
+  right: 20px;
+  background: black;
+  color: white;
+  border: none;
+  padding: 12px 16px;
+  border-radius: 6px;
+  cursor: pointer;
+  font-size: 18px;
+  box-shadow: 0 2px 6px rgba(0,0,0,0.2);
+}
