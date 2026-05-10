@@ -2,6 +2,7 @@ import { Component, ChangeDetectorRef } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { SupabaseService } from '../services/supabase';
+import { produce_listings } from '../model/listing.model';
 
 @Component({
   selector: 'app-create-listing',
@@ -101,7 +102,7 @@ export class CreateListing {
   async submitListing() {
     this.message = '';
 
-    if (!this.listingOfProduceOrFruit.producename || !this.listingOfProduceOrFruit.quantOfProduce || !this.listingOfProduceOrFruit.house) {
+    if (!this.listingOfProduceOrFruit.producename || !this.listingOfProduceOrFruit.quantOfProduce) {
       this.message = 'Please fill out the required fields before submitting.';
       return;
     }
@@ -124,11 +125,11 @@ export class CreateListing {
       const { error } = await this.supabaseService.saveProduceListing({
         user_id: user.id,
         title: this.listingOfProduceOrFruit.producename,
-        quantity: String(this.listingOfProduceOrFruit.quantOfProduce),
-        description: this.listingOfProduceOrFruit.descrpt,
-        location: this.listingOfProduceOrFruit.house,
-        available_until: this.listingOfProduceOrFruit.availUntil || null,
-        contact_info: this.listingOfProduceOrFruit.contactInfo || null
+        quantity: this.listingOfProduceOrFruit.quantOfProduce,
+        description: this.listingOfProduceOrFruit.descrpt || null,
+        location: this.listingOfProduceOrFruit.house || null,
+        available_until: this.listingOfProduceOrFruit.availUntil,
+        contact_info: this.listingOfProduceOrFruit.contactInfo
       });
 
       if (error) {

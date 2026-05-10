@@ -36,13 +36,13 @@
             <textarea id="description" name="description" [(ngModel)]="listingOfProduceOrFruit.descrpt" rows="4" placeholder="Freshly ripened, in season, etc."></textarea>
 
             <label for="location">Pickup Location</label>
-            <input id="location" name="location" type="text" [(ngModel)]="listingOfProduceOrFruit.house" placeholder="123 Main Street, Anytown, ST 12345" required/>
+            <input id="location" name="location" type="text" [(ngModel)]="listingOfProduceOrFruit.house" placeholder="123 Main Street, Anytown, ST 12345"/>
 
             <label for="availableUntil">Available Until</label>
-            <input id="availableUntil" name="availableUntil" type="date" [(ngModel)]="listingOfProduceOrFruit.availUntil"/>
+            <input id="availableUntil" name="availableUntil" type="date" [(ngModel)]="listingOfProduceOrFruit.availUntil" required/>
 
             <label for="contact_info">Contact Info</label>
-            <input id="contact_info" name="contact_info" type="text" [(ngModel)]="listingOfProduceOrFruit.contactInfo" placeholder="Phone or Email"/>
+            <input id="contact_info" name="contact_info" type="text" [(ngModel)]="listingOfProduceOrFruit.contactInfo" placeholder="Phone or Email" required/>
 
             <button type="submit" [disabled]="submit">{{ submit ? 'Posting...' : 'Post Listing' }}</button>
         </form>

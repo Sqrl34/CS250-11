@@ -2,6 +2,7 @@ import { Injectable, inject, PLATFORM_ID } from '@angular/core';
 import { createClient, SupabaseClient, type User } from '@supabase/supabase-js';
 import { isPlatformBrowser, NumberSymbol } from '@angular/common';
 import { timeout } from 'rxjs';
+import { produce_listings } from '../model/listing.model';
 
 const SUPABASE_URL = 'https://hzxlambzoajpoccwcacm.supabase.co';
 const SUPABASE_ANON_KEY = 'sb_publishable_nah4tTxAS6AlMp0jCQD4-Q_QiWo7HPx';
@@ -112,24 +113,8 @@ export class SupabaseService {
     return null;
   }
 
-  async saveProduceListing(listing: {
-    user_id: string;
-    title: string;
-    quantity: string;
-    description: string;
-    location: string;
-    available_until: string | null;
-    contact_info: string | null;
-  }) {
-    const { data, error } = await this.supabase
-      .from('produce_listings')
-      .insert({user_id: listing.user_id, title: listing.title, quantity: listing.quantity, description: listing.description, location: listing.location, available_until: listing.available_until, contact_info: listing.contact_info});
-
-    if (error) {
-      console.error('Error saving produce listing:', error);
-      throw error;
-    }
-    return {data, error};
+  async saveProduceListing(listing: produce_listings) {
+    return this.supabase.from('produce_listings').insert(listing);
   }
 
   setUserRole(role: 'giver' | 'receiver'): void {
@@ -158,5 +143,9 @@ export class SupabaseService {
     }
 
     return sessionStorage.getItem(SESSION_ROLE_CONFIRMED_KEY) === '1';
+  }
+
+  async getProduceListings() {
+    return this.supabase.from('produce_listings').select('*').order('created_at', { ascending: false })
   }
 }
