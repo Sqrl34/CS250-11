@@ -3,9 +3,7 @@ import { createClient, SupabaseClient, type User } from '@supabase/supabase-js';
 import { isPlatformBrowser, NumberSymbol } from '@angular/common';
 import { timeout } from 'rxjs';
 import { produce_listings } from '../model/listing.model';
-
-const SUPABASE_URL = 'https://hzxlambzoajpoccwcacm.supabase.co';
-const SUPABASE_ANON_KEY = 'sb_publishable_nah4tTxAS6AlMp0jCQD4-Q_QiWo7HPx';
+import { environment } from '../../environments/environment';
 
 /** Sets when the user confirms a role this tab session */
 const SESSION_ROLE_CONFIRMED_KEY = 'urbanYield_roleConfirmed';
@@ -18,7 +16,7 @@ export class SupabaseService {
   private supabase: SupabaseClient;
 
   constructor() {
-    this.supabase = createClient(SUPABASE_URL, SUPABASE_ANON_KEY);
+    this.supabase = createClient(environment.supabaseUrl, environment.supabaseAnonKey);
   }
 
   getSupabase() {
