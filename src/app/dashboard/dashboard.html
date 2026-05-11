@@ -7,18 +7,17 @@
 
 <!-- CENTERED SEARCH + FILTER -->
 <div class="search-filter-bar">
-  <input type="text" class="search-input" placeholder="Search...">
-  <select class="filter-select">
-    <option value="">Filter</option>
-    <option value="location">Location</option>
-    <option value="availability">Availability</option>
-    <option value="date">Available Until</option>
-  </select>
+  <!-- Search bar -->
+  <input type="text" class="search-input" placeholder="Search..." [(ngModel)]="searchQuery" (input)="applyFilters()">
+  <!-- Min Quantity Search --> 
+  <input type="number" class="search-input" placeholder="Min Quantity" [(ngModel)]="minQuantity" (input)="applyFilters()" min="0">
+  <!-- Max Quantity Search -->
+  <input type="number" class="search-input" placeholder="Max Quantity" [(ngModel)]="maxQuantity" (input)="applyFilters()">
 </div>
 
 <!-- POSTS -->
 <div class="dashboard-container">
-  <div class="listing-card" *ngFor="let item of listings">
+  <div class="listing-card" *ngFor="let item of filteredListings">
 
     <div class="listing-image">
       <div class="image-placeholder"></div>
